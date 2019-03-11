@@ -10,7 +10,7 @@
 <script>
     export default {
         name: "Pharmacy",
-        props: ['pharma', 'entActive','call'],
+        props: ['pharma','call'],
         data() {
             return {
                 isActive: false,
@@ -19,30 +19,12 @@
         },
         methods: {
             select() {
-                this.call(this.pharma.pharmaID)
                 this.isActive = !this.isActive
+	            if(!this.isActive)
+	            this.call(this.pharma.pharmaID)
+	            else
+		        this.call(this.pharma)
             }
         }
     }
 </script>
-
-<style scoped>
-	.active {
-		background-color: #99d448;
-		color: white;
-	}
-	
-	a {
-		padding-right: 100px;
-		display: block;
-		text-align: left;
-		height: 100%;
-	}
-	
-	tr {
-		cursor: pointer;
-		box-sizing: border-box;
-		color: #415a6c;
-		border: 1px solid #eeeeee;
-	}
-</style>

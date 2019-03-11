@@ -1,0 +1,25 @@
+.button {
+  display: inline-block;
+  cursor: pointer;
+  background-color: $button;
+  height: 50px;
+  width: 200px;
+  border-radius: 6px;
+  color: $accent-text;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  &_wrapper {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &.lock{
+    disabled:disabled;
+    background-color: $button-lock;
+    pointer-events: none;
+  }
+}
+.button:focus {
+  background-color: $button-focus;
+}

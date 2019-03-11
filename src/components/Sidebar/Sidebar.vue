@@ -1,22 +1,55 @@
 <template>
-	
 	<aside class="sidebar">
-		<div class="sidebar_btn home">
-			<router-link class="no_decor" to="/dashboard">Dashboard</router-link>
-		</div>
-		<div class="sidebar_btn add_contract">
-			<router-link class="no_decor" to="/contract/select-legal-entity">Add Contract</router-link>
-		</div>
-		<div class="sidebar_btn open_tasks">
-			<router-link class="no_decor" to="/open-tasks">Open Tasks</router-link>
-		</div>
+		<router-link
+				v-for="(btn, index) in buttons"
+				:to="btn.link"
+				:class="{'router-link-exact-active':btn.active}"
+				@click.native="setActive(btn)"
+			>
+			<icon-set :index="index"/>
+			{{btn.name}}
+		</router-link>
+		<!--</div>-->
 	</aside>
-
 </template>
 
 <script>
+	import IconSet from './icons/components/HomeICon'
 	export default {
-		name: "Sidebar"
+		name: "Sidebar",
+		components: {
+			IconSet
+		},
+		data() {
+			return {
+				buttons: [
+					{
+						name: 'Dashboard',
+						link: "/dashboard",
+						active:false
+					},
+					{
+						name: 'Add Contract',
+						link: "/add-contract/step1",
+						active:false
+					},
+					{
+						name: 'Open Tasks',
+						link: "/open-tasks",
+						active:false
+					}
+				]
+
+			}
+		},
+		methods:{
+			setActive(active){
+				this.buttons.forEach(btn=>{
+					btn.active=false
+				})
+				active.active=true
+			}
+		}
 	}
 </script>
 

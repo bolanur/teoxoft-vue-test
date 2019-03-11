@@ -5,18 +5,50 @@
   color: #2c3e50;
   width: 60%;
   margin: 40px auto;
+  font-size: 18px;
 }
-.welcome{
-margin-left: 200px;
+
+.welcome {
+  margin-left: 200px;
+
+  p {
+    display: inline;
+    margin-right: 100px;
+    line-height: 40px;
+  }
+
+  .icon {
+    margin-right: 8px;
+    display: inline-block;
+    background-size: 1em;
+    height: 1em;
+    width: 1em;
+
+    &_user {
+      background-image: url('./assets/icons/user-shape.svg');
+    }
+
+    &_logout {
+      background-image: url('./assets/icons/padlock.svg');
+    }
+  }
 }
+
 .top_line {
   height: 40px;
-  color: $accent-text-color;
-  background-color: #b0287a;
+  color: $accent-text;
+  background-color: $main;
 }
 
 .no_decor {
-  color: $accent-text-color;
+  color: $accent-text;
   text-decoration: none;
+}
 
+h1 {
+  font-size: 32px;
+}
+
+.content{
+  padding: 20px 200px;
 }

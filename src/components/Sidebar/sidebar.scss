@@ -1,28 +1,39 @@
 .sidebar {
   text-align: center;
   background-color: $main;
-  width: 150px;
+  width: 180px;
   float: left;
-  color: $accent-text-color;
+  color: $accent-text;
+  padding-top: 50px;
+  height: 800px;
 
-  &_btn {
-    min-height: 150px;
-    min-width: 150px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: $accent-text;
+    box-sizing: border-box;
+    height: 150px;
+    width: 180px;
     cursor: pointer;
-    background-size: 50px;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .home {
-    background-image: url("icons/home.svg");
-  }
-  .add_contract{
-    background-image: url("icons/copy-archive.svg");
-  }
-  .open_tasks{
-    background-image: url("icons/check.svg");
+    outline: none;
+
+    svg {
+      fill: $accent-text;
+      margin-bottom: 16px;
+    }
+
+    &.router-link-exact-active {
+      background-color: $sidebar-active;
+      color: $active-text;
+
+      svg {
+        fill: $active-text;
+      }
+
+    }
   }
 }
+

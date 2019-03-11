@@ -1,0 +1,33 @@
+
+table {
+  color:$accent-text;
+  border-collapse: collapse;
+  border: 1px solid $bg-table-border;
+  margin-bottom: 40px;
+}
+
+td,th {
+  height: 2em;
+  padding: 0 30px ;
+}
+tr {
+  cursor: pointer;
+  box-sizing: border-box;
+  color: $main-text;
+  th {
+    background-color: $bg-table-head;
+    text-align: left;
+    color:$accent-text;
+    border: 1px solid $bg-table-border;
+  }
+  &:nth-child(2n+1){
+    background-color: $bg-table-tr-even;
+
+  }
+
+}
+
+.active {
+  background-color:$bg-table-tr-active !important;
+  color: $accent-text;
+}

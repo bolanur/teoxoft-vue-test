@@ -1,5 +1,7 @@
 <template>
-	$END$
+	<section class="content">
+		<h1>Open Tasks</h1>
+	</section>
 </template>
 
 <script>

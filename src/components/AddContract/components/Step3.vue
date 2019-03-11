@@ -16,15 +16,15 @@
 				<input v-model="servAgr" type="text">
 			</div>
 			<div class=""><p>Contract Start Date</p>
-				<datepicker
-							v-model="startDate"
-				            placeholder="Select Date"
-							calendar-class="calendar"
-				            :format="DatePickerFormat"
-				            :disabledDates="disabledDates">
-				</datepicker>
+				<div>
+					<date-picker v-model="startDate" :first-day-of-week="1" :lang="lang"
+					></date-picker>
+				</div>
 			</div>
-			<div class=""><p>Contracat End Date</p></div>
+			<div class=""><p>Contracat End Date</p>
+				<date-picker v-model="endDate" :first-day-of-week="1" :lang="lang"
+				             :not-before="disabled"></date-picker>
+			</div>
 			<div class="">
 				<p>Lacation</p>
 				<input v-model="location" type="text">
@@ -34,44 +34,78 @@
 				<input v-model="contractorName" type="text">
 			</div>
 		</form>
-		<router-link  to="/contract/select-pharmacies/">Back</router-link><br>
-		<router-link to="/contract/result">result</router-link>
+		<div class="button_wrapper">
+			<div class="button" @click="back">Back</div>
+			<div @click="addToStore" class="button"  v-bind:class="{ lock: locker}" >result</div>
+		</div>
 	</section>
 
 
 </template>
 
 <script>
-    import Datepicker from 'vuejs-datepicker';
+	import DatePicker from 'vue2-datepicker'
 
-    export default {
+	export default {
 
-        components: {
-            Datepicker
-        },
-        updated(){
-	        console.log(this.$data)
-        },
-	    data(){
-                return{
-                servAgr:'',
-	            startDate:'',
-	            endDate:'',
-	            location:'',
-	            contractorName:'',
-                contractType:'',
-                DatePickerFormat: 'dd/MM/yyyy',
-                disabledDates: {
-                    to: new Date(Date.now() - 8640000)
-                }
-            }
-	    },
-        name: "Step3"
-    }
+		components: {
+			DatePicker
+		},
+		computed: {
+			locker() {
+				return this.disabled && this.servAgr && this.startDate && this.endDate && this.location && this.contractorName && this.contractType ? false : true
+			}
+		},
+		watch: {
+			startDate() {
+				this.disabled = this.startDate
+				this.endDate = ''
+			}
+		},
+		data() {
+			return {
+				disabled: '',
+				servAgr: '',
+				startDate: '',
+				endDate: '',
+				location: '',
+				contractorName: '',
+				contractType: '',
+				lang: {
+					days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+					months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+					pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+					placeholder: {
+						date: 'Select Date',
+						dateRange: 'Select Date Range'
+					}
+				}
+			}
+		},
+		methods: {
+			addToStore() {
+				let form = {
+					location:this.location,
+					serviceAgreement: this.servAgr,
+					startDate: this.startDate,
+					endDate: this.endDate,
+					contractorName: this.contractorName,
+					contractType: this.contractType
+				}
+				this.$store.commit("addForm", form)
+				this.$router.push("/add-contract/step4/")
+			},
+			back(){
+				this.$router.go(-1)
+			}
+			
+		},
+		name: "Step3"
+	}
 </script>
 
 <style scoped>
-
+	
 	
 	.input-name {
 		display: inline;
@@ -85,12 +119,5 @@
 		height: 31px;
 	}
 	
-	/*
-		option{
-			font-weight: normal;
-			display: block;
-			white-space: pre;
-			min-height: 1.2em;
-			padding: 0px 2px 1px;
-		}*/
+
 </style>
